@@ -16,9 +16,10 @@ from sklearn.metrics import mean_squared_error
 from math import sqrt
 from scipy.linalg import lu, solve
 
-from wrap_offlineModel import offlineMFModel
+from wrap_offlineModel import offlineMFModel, offlinePrediction
 import generateLiveRating as gLR
 from scipy.spatial.distance import cosine
+
 
 class liveFunction:
     def newUser_rating_noBias(ratings_newUser, items, gbias, ibias):
@@ -128,7 +129,15 @@ class liveFunction:
         rmse = sqrt(mean_squared_error(ratings_newUser_values, r_predict_ratedItems))
         print('\nRMSE for the prediction of the newUser\'s ratings:', rmse)
         print()
-        
+
+    def relative_ave(singleUser_prediction, items_prediction_ave):
+        singleUser_predictionAve = pd.merge(singleUser_prediction, items_prediction_ave, how = 'left', on = ['item'])
+            # singleUser_prediction: ['user', 'item', 'rating', 'prediction']
+            # items_prediction_ave: ['item', 'ave']
+        singleUser_predictionAve['diff'] = singleUser_predictionAve['ave'] - singleUser_predictionAve['prediction']
+
+        return singleUser_predictionAve
+    
     def similarity_user_features(umat, users, feature_newUser, method = 'cosine'):
         '''
             ALS has already pre-weighted the user features/item features
@@ -175,15 +184,28 @@ if __name__ == '__main__':
     [items, imat, gbias, ibias, umat, users, ubias] = offlineMFModel.UIfeatures(ratings, algo)
 #    offlineMFModel.save_model(path, items, imat, gbias, ibias, umat, users, ubias, filename)
     ## load model
+    
+    #===> testing newUser_predicting()
     full_path = path + filename_prefix + str(file_num) + '.npz'
     [items, imat, gbias, ibias, umat, users, _] = offlineMFModel.load_model(full_path)
     [predicted_newUser, feature_newUser] = liveFunction.newUser_predicting(
                                                 ratings_newUser, newUserID, items, imat, gbias, ibias)
+    #===> testing computeRMSE()
     liveFunction.computeRMSE(ratings_newUser, predicted_newUser)
+    
+    #===> testing relative_ave()
+    [prediction_newUser,_] = liveFunction.newUser_predicting(ratings_newUser, newUserID, items, imat, gbias, ibias)
+    offline_item_ave_full_path = "./offline_prediction_testing/items_prediction_ave.npz"
+    attri_name = ['item', 'ave']
+    items_prediction_ave = offlinePrediction.load_dataset(offline_item_ave_full_path, attri_name)
+    items_prediction_ave = items_prediction_ave.astype({attri_name[0]: np.int64})
+    singleUser_predictionAve = liveFunction.relative_ave(prediction_newUser, items_prediction_ave)
+    # print(singleUser_predictionAve.columns)
+    print(singleUser_predictionAve.head(5))
     
     #===> testing similarity_user_features
     full_path_MFmodel = './offline_MFmodel_testing/testingMF_774.npz'
     distance_choice = 'cosine'
     similarity = liveFunction.similarity_user_features(umat, users, feature_newUser, distance_choice)
-    print('Similarity the of newUser and other users in offline user set with size: ', similarity.shape)
+    print('\nSimilarity the of newUser and other users in offline user set with size: ', similarity.shape)
         # 942, 2

@@ -35,9 +35,10 @@ def descending_distance_from_ave(full_path_MFmodel, ratings_newUser, newUserID,
         # int item_id
     # print(items_prediction_ave.head(10))
     
-    newUser_predictionAve = offlineCalculation.relative_ave(prediction_newUser, items_prediction_ave)
+    newUser_predictionAve = liveFunction.relative_ave(prediction_newUser, items_prediction_ave)
     newUser_predictionAve_sortedByDiff = newUser_predictionAve.sort_values(by='diff', ascending = False)
         # [user, item, rating, prediction, ave, diff]
+        # Should be TopN(avePrediction - newUserPrediction)
 
     return newUser_predictionAve_sortedByDiff
     

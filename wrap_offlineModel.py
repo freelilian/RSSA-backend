@@ -142,14 +142,7 @@ class offlineCalculation:
         
         return item_prediction_ave_dataframe
         
-    def relative_ave(singleUser_prediction, item_prediction_ave):
-        singleUser_predictionAve = pd.merge(singleUser_prediction, item_prediction_ave, how = 'left', on = ['item'])
-            # singleUser_prediction: ['user', 'item', 'rating', 'prediction']
-            # item_prediction_ave: ['item', 'ave']
-        singleUser_predictionAve['diff'] = singleUser_predictionAve['ave'] - singleUser_predictionAve['prediction']
-
-        return singleUser_predictionAve
-        
+   
     def item_count_ratings(ratings):
         #full_prediction_sortedByPrediction = full_prediction.sort_values(by = 'prediction', ascending = False)
         #topN_full_prediction = full_prediction_sortedByPrediction.head(numTopN)

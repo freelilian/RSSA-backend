@@ -1,10 +1,11 @@
 *------------------------------------------------------------------
-Algorithms for lively recommending RSSA lists V2
+Algorithms for lively recommending RSSA lists V3
 *------------------------------------------------------------------
 				PS: using ml-100k, lenskit 0.3.0
 *------------------------------------------------------------------
 	Updated list:
-		- save all offline models as .npz file (instead of as .csv file), then save storage cost
+		- move relative_ave() function from wrap_offlineModel.py to wrap_update.py
+		- add testing codes for relative_ave() function in wrap_update.py
 
 *------------------------------------------------------------------
 	wrap_offlineModel.py
@@ -27,7 +28,6 @@ Algorithms for lively recommending RSSA lists V2
 				- def merge_prediction_rating
 			- class offlineCalculation
 				- def item_calculate_ave_prediction
-				- def relative_ave
 				- def item_count_ratings
 				- def singular_value_weight (unused)
 			- main: test the functionality of the defined classes and functions
@@ -52,6 +52,7 @@ Algorithms for lively recommending RSSA lists V2
 				- def newUser_rating_noBias
 				- def newUser_predicting
 				- def computeRMSE
+				- def relative_ave
 				- def similarity_user_features
 			- main: test the functionality of the defined functions and print RMSE
 	
