@@ -1,8 +1,8 @@
-*-------------------
+*------------------------------------------------------------------------------------------------------------------
 Algorithms for lively recommending RSSA lists V3
-*-------------------
+*------------------------------------------------------------------------------------------------------------------
 	PS: using ml-100k, lenskit 0.3.0
-*-------------------
+*------------------------------------------------------------------------------------------------------------------
 	Updated list:
 		- move relative_ave() function from wrap_offlineModel.py to wrap_update.py
 		- add testing codes for relative_ave() function in wrap_update.py
@@ -11,7 +11,7 @@ Algorithms for lively recommending RSSA lists V3
 			- train_offline_model.py
 			- rssa_lists.py
 		
-*-------------------
+*------------------------------------------------------------------------------------------------------------------
 	wrap_offlineModel.py
 		Compute some offline models and save them: 
 			- offline_MFmodels
