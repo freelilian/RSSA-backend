@@ -5,8 +5,9 @@ Algorithms for lively recommending RSSA lists V4
 *------------------------------------------------------------------------------------------------------------------
 	Updated list:
 		- test on ml-latest-small, works!
-		- test on ml-25m dataset
-		- make sure each user rated >= movies in trainset
+		- test on ml-25m dataset, run out of memory when generating full user-item pairs
+			- Segmentation fault (core dumped)
+		- make sure each user rated >= 20 movies in trainset
 		
 *------------------------------------------------------------------------------------------------------------------
 	wrap_offlineModel.py
