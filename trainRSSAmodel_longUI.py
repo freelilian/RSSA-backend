@@ -29,10 +29,10 @@ if __name__ == '__main__':
     '''
     
     # test on ml-25m and ml-latest-small
-    fullpath_ratings = '../data/ml-LS_ratings_ready.npz'
+    # fullpath_ratings = '../data/ml-LS_ratings_ready.npz'
         # works
-    # fullpath_ratings = '../data/ml-25m_ratings_ready.npz'
-        ####??? doesn't work since full-UI-pairs data too long (> 8 billions lines for trainset)
+    fullpath_ratings = '../data/ml-25m_ratings_ready.npz'
+        # doesn't work since full-UI-pairs data too long (> 8 billions lines for trainset)
     attri_name = ['user', 'item', 'rating', 'timestamp']
     ratings = offlinePrediction.load_dataset(fullpath_ratings, attri_name)
     ratings = ratings.astype({'user': int, 'item': int, 'rating': float, 'timestamp': int})
