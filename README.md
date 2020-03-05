@@ -1,14 +1,3 @@
-
-
-
-
-
-
-
-
-
-
-
 *------------------------------------------------------------------
 Algorithms for lively recommending RSSA lists V3
 *------------------------------------------------------------------
@@ -105,12 +94,16 @@ Algorithms for lively recommending RSSA lists V3
 			- def high_std_items
 			- def controversial_items
 			- def print_to_screen
+			- main: test the functionality of the APIs
 				
-	
-	
-	
-	
-	
+	dataset_split.py
+		Split offline dataset to trainset and testset, use testset to generate liveUser, then to test the update functions
+		Containing:
+			- class datasetSplit
+				- def split_dataset
+				- def load_data
+				- def load_live_user_ratings
+			- main: test the functionality of the defined functions
 	
 	
 	

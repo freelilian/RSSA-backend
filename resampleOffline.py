@@ -21,7 +21,7 @@ def train_offline_resample_models(ratings, numRepetition, alpha, algo, path, fil
     numObservations = ratings.shape[0]
     destination_list = []
     for i in range(numRepetition):
-        print (i+1)
+        print ('\tTraining sample', i+1, ':', end = '\t')
         sampled_ratings = ratings.sample(n = int(numObservations * alpha), replace = False)
         # insert the new user here? 
         # seams not ...
@@ -34,7 +34,7 @@ def train_offline_resample_models(ratings, numRepetition, alpha, algo, path, fil
         # save_model(imat, item_num, gbias, ibias, iteration)
         destination_list.append(destination)
             # used to load the saved_model with np.load(destination)
-        
+            # all fullpaths of the saved resampling models
     return destination_list
 
 

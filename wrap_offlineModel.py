@@ -212,7 +212,7 @@ if __name__ == '__main__':
     
     num_features = 50
     algo = als.BiasedMF(num_features)
-    items, imat, gbias, ibias, umat, users, ubias = offlineMFModel.UIfeatures(ratings, algo)
+    [items, imat, gbias, ibias, umat, users, ubias] = offlineMFModel.UIfeatures(ratings, algo)
     offlineMFModel.save_model(path, items, imat, gbias, ibias, umat, users, ubias, filename)
     
 
@@ -260,8 +260,8 @@ if __name__ == '__main__':
 #    print(items_prediction_ave.head(10))
 #    print(load_dataset.head(10))
     
-    #===>calculate average predictions for all items in dataset 
-    # save item average prediction
+    #===>calculate ratings count for all items in dataset 
+    # save item ratings count
     items_rating_count = offlineCalculation.item_count_ratings(ratings)
         #return [item, count]
     # print(items_rating_count.shape)
