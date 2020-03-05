@@ -1,12 +1,16 @@
-*------------------------------------------------------------------
+*-------------------
 Algorithms for lively recommending RSSA lists V3
-*------------------------------------------------------------------
-				PS: using ml-100k, lenskit 0.3.0
-*------------------------------------------------------------------
+*-------------------
+	PS: using ml-100k, lenskit 0.3.0
+*-------------------
 	Updated list:
 		- move relative_ave() function from wrap_offlineModel.py to wrap_update.py
 		- add testing codes for relative_ave() function in wrap_update.py
-
+		- split offline dataset into train set and test set, use test set to generate dummy liveUser ratings
+			- dataset_split.py
+			- train_offline_model.py
+			- rssa_lists.py
+		
 *------------------------------------------------------------------
 	wrap_offlineModel.py
 		Compute some offline models and save them: 
@@ -86,14 +90,16 @@ Algorithms for lively recommending RSSA lists V3
 			- main: test the functionality of list -- Things that are controversial
 	
 	API.py
-		APIs for calling RSSA lists with an live newUser's data and print all the five recommendation lists
+		APIs for calling RSSA recommender with an live newUser's data and print all the five recommendation lists
 		Containing:
-			- def topn_items
-			- def hate_items
-			- def novel_items
-			- def high_std_items
-			- def controversial_items
-			- def print_to_screen
+			- class recommenderRSSA
+				- def topn_items
+				- def hate_items
+				- def novel_items
+				- def high_std_items
+				- def controversial_items
+			- class printRSSAlist
+				- def print_to_screen
 			- main: test the functionality of the APIs
 				
 	dataset_split.py
@@ -105,7 +111,17 @@ Algorithms for lively recommending RSSA lists V3
 				- def load_live_user_ratings
 			- main: test the functionality of the defined functions
 	
-	
+	train_offline_model.py
+		Train all nessary offline models:
+			- MFmodel
+			- 20 Resampled models
+		Pre-calculate offline dataset:
+			- prediction_full_UI_pair
+			- items_prediction_ave
+			- items_rating_count
+		Save in ./data_dummy
+	rssa_lists.py
+		Test all rssa lists
 	
 	
 	
