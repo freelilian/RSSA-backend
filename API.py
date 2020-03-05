@@ -130,8 +130,7 @@ if __name__ == '__main__':
     list_name = "Things we have no clue about: "
     attributes_to_print = ['item', 'prediction', 'std']
     printRSSAlist.print_to_screen(recommendation_highStd, newUserID, list_name, attributes_to_print, "%20.0f%20.2f%20.2f")
-    ###  ??? 结果不太对啊， 不同User的recommdations基本相同，只是顺序有差别
-    
+
     
     #===> testing - Things that are controversial
     full_path_MFmodel = './offline_MFmodel_testing/testingMF_' + str(file_num) + '.npz'
