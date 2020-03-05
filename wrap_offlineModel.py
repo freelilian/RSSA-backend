@@ -30,10 +30,10 @@ class offlineMFModel:
             ubias = npz['ubias']
             ibias = npz['ibias']
 
-        print(len(items), ' items in itemset')
-            # check if item set is full since 3 users is split from the dataset
-            # 1682, full item set
-       
+        print('\t', len(items), ' items in itemset', end = '\t')
+        print('\t', len(users), ' users in userset', end = '\t')
+        print('\t %d user-item pairs to predict!!!' % (len(items) * len(users)))
+        
         return items, imat, gbias, ibias, umat, users, ubias
 
     def save_model(path, items, imat, gbias, ibias, umat, users, ubias, filename):

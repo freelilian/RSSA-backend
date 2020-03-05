@@ -21,7 +21,7 @@ def train_offline_resample_models(ratings, numRepetition, alpha, algo, path, fil
     numObservations = ratings.shape[0]
     destination_list = []
     for i in range(numRepetition):
-        print ('\tTraining sample', i+1, ':', end = '\t')
+        print ('\t\tTraining sample', i+1, ':', end = ' ')
         sampled_ratings = ratings.sample(n = int(numObservations * alpha), replace = False)
         # insert the new user here? 
         # seams not ...

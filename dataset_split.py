@@ -24,21 +24,31 @@ class datasetSplit:
         userIDs_train = userIDs[0:num_train]
             # does not include userIDs[num_train]
             # np.array
+            # ???????? Should I do randomization for userIDs?
         ratings_train = ratings[ratings['user'].isin(userIDs_train)]
         ratings_test = ratings[~ratings['user'].isin(userIDs_train)]
         # print(ratings_test.shape)
-            # (9981, 4)
-        # excluding items that are not rated by users in the trainset
+            # (9981, 4) ml-100k
+            
+        #===> gurantee 20 ratings for each user in trainset
+        [users, rating_count] = np.unique(ratings_train['user'], return_counts = True)    
+        users_n_count = pd.DataFrame({'user': users, 'count': rating_count})    
+        users_n_count_enoughRatings = users_n_count[users_n_count['count'] >= 20]    
+        valid_users = users_n_count_enoughRatings['user']    
+        ratings_train = ratings_train[ratings_train['user'].isin(valid_users.values)]   
+            # each users in trainset 
+            
+        #===> excluding items that are not rated by users in the trainset
         itemset_train = np.unique(ratings_train['item'])
         ratings_test = ratings_test[ratings_test['item'].isin(itemset_train)]
         # print(ratings_test.shape)
-            # (9973, 4)
+            # (9973, 4) ml-100k
             
         return ratings_train, ratings_test
         
     def load_data(full_path_train, attri_name):
         trainset = offlinePrediction.load_dataset(full_path_train, attri_name)
-        trainset = trainset.astype({'user': int, 'item': int})
+        trainset = trainset.astype({'user': int, 'item': int, 'rating': float, 'timestamp': int})
             # ['user', 'item', 'rating', 'timestamp']
         
         return trainset

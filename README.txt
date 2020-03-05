@@ -1,15 +1,12 @@
 *------------------------------------------------------------------------------------------------------------------
-Algorithms for lively recommending RSSA lists V3
+Algorithms for lively recommending RSSA lists V4
 *------------------------------------------------------------------------------------------------------------------
-	PS: using ml-100k, lenskit 0.3.0
+	PS: using ml-25m, lenskit 0.3.0
 *------------------------------------------------------------------------------------------------------------------
 	Updated list:
-		- move relative_ave() function from wrap_offlineModel.py to wrap_update.py
-		- add testing codes for relative_ave() function in wrap_update.py
-		- split offline dataset into train set and test set, use test set to generate dummy liveUser ratings
-			- dataset_split.py
-			- train_offline_model.py
-			- rssa_lists.py
+		- test on ml-latest-small, works!
+		- test on ml-25m dataset
+		- make sure each user rated >= movies in trainset
 		
 *------------------------------------------------------------------------------------------------------------------
 	wrap_offlineModel.py
